@@ -1,0 +1,12 @@
+<h1>Your Friend Requests</h1>
+<% if @requests.empty? %>
+  <p>No requests at this time!<p>
+<% else %>
+  <% @requests.each do |rq| %>
+  <div>
+    <%= link_to User.find(rq.sender_id).username, user_path(rq.sender_id) %>
+    <%= button_to 'Accept', user_friend_request_path(user_id: current_user.id, id: rq.id, accept: true), method: :put %>
+    <%= button_to 'Decline', user_friend_request_path(user_id: current_user.id, id: rq.id, accept: false), method: :put %>
+  </div>
+  <% end %>
+<% end %>

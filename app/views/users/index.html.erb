@@ -1,0 +1,18 @@
+<h1>Search Users</h1>
+
+<%= form_with url: '/users', method: 'get', local: true do |f| %>
+  <%= f.hidden_field :searched, value: true %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <%= f.submit 'Search' %>
+<% end %>
+
+<% if params[:searched] %>
+  <% if @users.empty? %>
+    <p>No usernames matched.</p>
+  <% else %>
+    <% @users.each do |u| %>
+      <p><%= link_to u.username, u %><p>
+    <% end %>
+  <% end %>
+<% end %>

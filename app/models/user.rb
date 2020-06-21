@@ -4,17 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  validates :name, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
 
-  has_many :friendships
-  has_many :friends, through: :friendships
-  has_many :friend_owners, through: :friendships
+  has_many :friendships, foreign_key: :friend_owner_id
+  has_many :friends, class_name: 'User', through: :friendships
 
-  has_many :posts
-  has_many :comments
+  has_many :posts, foreign_key: :author_id
+  has_many :comments, foreign_key: :author_id
   has_many :likes
 
-  has_many :friend_requests
-  has_many :receivers, through: :friend_requests
-  has_many :senders, through: :friend_requests
+  has_many :friend_requests, foreign_key: :receiver_id
+  has_many :senders, class_name: 'User', through: :friend_requests
 end

@@ -14,6 +14,15 @@
       <%= content_tag :div, msg, class: name %>
     <% end -%>
     
+    <% if user_signed_in? %>
+      <div>
+      Signed In As <%= link_to current_user.username, current_user %> 
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %> 
+      <%= link_to 'Home', posts_path %> 
+      <%= link_to 'Friend Requests', user_friend_requests_path(current_user) %>  
+      <%= link_to 'Find Friends', users_path %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

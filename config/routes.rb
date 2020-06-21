@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  root 'posts#index'
+
   devise_for :users
   resources :users, only: [:show, :index] do
-    resource :profile
+    resources :friend_requests, only: [:index, :create, :update]
   end
-  resources :posts do 
-    resources :comments, only: [:create, :destroy]
+
+  resources :posts, except: [:edit, :update] do 
+    resources :comments, only: [:create]
   end
-  root to: 'posts#index'
+  resources :comments, only: [:destroy]
 end
