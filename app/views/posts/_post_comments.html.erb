@@ -2,5 +2,7 @@
   <% locals[:post].comments.each do |c| %>
     <div>Commenter: <%= link_to c.author.username, user_path(c.author) %></div>
     <div>Comment: <%= c.body %></div>
+    <p><%= c.likes.count %> Likes - <%= link_to_if(!user_likes?(c), 'Like', comment_path(c, like: true), method: :put) { link_to 'Liked', comment_path(c, dislike: true), method: :put } %></p>
+
   <% end %>
 </div>

@@ -4,4 +4,15 @@ class CommentsController < ApplicationController
     @comment.save
     redirect_to Post.find(params[:post_id])
   end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if params[:like]
+      like = @comment.likes.create(user_id: current_user.id)
+    elsif params[:dislike]
+      like = @comment.likes.find_by(user_id: current_user.id)
+      like.destroy
+    end
+    redirect_to @comment.post
+  end
 end

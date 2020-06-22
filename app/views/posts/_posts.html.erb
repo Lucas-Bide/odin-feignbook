@@ -1,7 +1,7 @@
 <div> 
   <% locals[:posts].each do |post| %>
     <div>
-      <div><%= link_to post.title, post %> By <%= post.author.username %></div>
+      <div><%= link_to post.title, post %> By <%= link_to post.author.username, user_path(post.author) %></div>
       <div><%= post.body %></div>
       <%= render 'posts/post_comments', locals: { post: post } %>
     </div>

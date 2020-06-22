@@ -28,7 +28,14 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if @post.update(post_params)
+    if params[:like]
+      like = @post.likes.create(user_id: current_user.id)
+      redirect_to @post
+    elsif params[:dislike]
+      like = @post.likes.find_by(user_id: current_user.id)
+      like.destroy
+      redirect_to @post
+    elsif @post.update(post_params)
       redirect_to @post
     else
       render 'posts/edit'

@@ -1,6 +1,7 @@
 <h1><%= @post.title %></h1>
 <%= link_to_if(@post.author == current_user, 'Edit', edit_post_path(@post)) { '' } %>
 <div><%= @post.body %></div>
+<p><%= @post.likes.count %> Likes - <%= link_to_if(!user_likes?(@post), 'Like', post_path(@post, like: true), method: :put) { link_to 'Liked', post_path(@post, dislike: true), method: :put } %></p>
 <div>
   <p>Make a Comment</p>
   <%= form_with url: post_comments_url(@post), method: 'post' do |f| %>
@@ -8,4 +9,4 @@
     <%= f.submit 'Comment' %>
   <% end %>
 </div>
-<%= render 'post_comments', locals: { post: @post } %>
+<%= render 'post_comments', full: true, locals: { post: @post } %>

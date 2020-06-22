@@ -13,6 +13,12 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+   <div class="field">
+    <%= f.label 'Profile Picture' %>
+    <%= f.select :profile_pic, options_for_select([['default', 'default_pfp.png'],['male', 'male_pfp.png'],['female', 'female_pfp.png']], resource.profile_pic) %>
+  </div>
+
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

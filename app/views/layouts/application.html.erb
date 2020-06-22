@@ -19,7 +19,7 @@
       Signed In As <%= link_to current_user.username, current_user %> 
       <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %> 
       <%= link_to 'Home', posts_path %> 
-      <%= link_to 'Friend Requests', user_friend_requests_path(current_user) %>  
+      <%= link_to current_user.friend_requests.where(declined_accepted: false).empty? ? 'Friend Requests' : "Friend Requests (#{current_user.friend_requests.where(declined_accepted: false).count})", user_friend_requests_path(current_user) %>  
       <%= link_to 'Find Friends', users_path %>
       </div>
     <% end %>
