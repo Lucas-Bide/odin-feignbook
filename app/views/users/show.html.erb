@@ -1,7 +1,11 @@
 <h1><%= @user.username %>'s Profile</h2>
 
-<% if @user != current_user && request_sendable?(@user) %>
-  <%= button_to 'Send Friend Request', user_friend_requests_path(@user) %> 
+<% if @user != current_user %> 
+  <% if current_user.friends.include?(@user) %> 
+    <%= button_to 'Unfriend', friendship_path(friendship(current_user, @user)), method: :delete %>
+  <% elsif request_sendable?(@user) %>
+    <%= button_to 'Send Friend Request', user_friend_requests_path(@user) %> 
+  <% end %>
 <% elsif @user == current_user %>
   <%# button_to 'Edit Profile', Will use users#edit to change pfp later %> 
   <%= button_to 'Settings', edit_user_registration_path(current_user), method: :get %>

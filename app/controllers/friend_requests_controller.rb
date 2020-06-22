@@ -11,12 +11,10 @@ class FriendRequestsController < ApplicationController
   def update
     @request = FriendRequest.find(params[:id])
     if params[:accept]
-      p 'HELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
       @request.declined_accepted = true
       Friendship.create(friend_owner_id: current_user.id, friend_id: @request.sender_id)
       Friendship.create(friend_owner_id: @request.sender_id, friend_id: current_user.id)
     else
-      P 'NEVERMINDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD'
       @request.declined_accepted = true
     end
     @request.save

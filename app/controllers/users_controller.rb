@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   def index
     @users = []
     if params[:searched]
-      if params[:friends]
+      if params[:friends] == '1'
         @users = current_user.friends
-      else
+      elsif !params[:username].empty?
         @users = User.where("lower(username) LIKE ? AND id != ?", "%#{params[:username]}%".downcase, current_user.id)
       end
     end
