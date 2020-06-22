@@ -1,0 +1,9 @@
+<div> 
+  <% locals[:posts].each do |post| %>
+    <div>
+      <div><%= link_to post.title, post %></div>
+      <div><%= post.body %></div>
+      <%= render 'posts/post_comments', locals: { post: post } %>
+    </div>
+  <% end %>
+</div>

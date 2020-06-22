@@ -1,0 +1,6 @@
+<div>
+  <% locals[:post].comments.each do |c| %>
+    <div>Commenter: <%= c.author.username %></div>
+    <div>Comment: <%= c.body %></div>
+  <% end %>
+</div>

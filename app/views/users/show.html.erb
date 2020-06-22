@@ -7,15 +7,4 @@
   <%= button_to 'Settings', edit_user_registration_path(current_user), method: :get %>
 <% end %>
 
-<div> 
-  <% @user.posts.each do |post| %>
-    <div><%= post.title %></div>
-    <div><%= post.body %></div>
-    <div>
-      <% post.comments.each do |c| %>
-        <div><%= c.author %></div>
-        <div><%= c.body %></div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+<%= render 'posts/posts', locals: { posts: @user.posts } %>

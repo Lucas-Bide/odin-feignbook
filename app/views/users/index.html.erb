@@ -2,8 +2,9 @@
 
 <%= form_with url: '/users', method: 'get', local: true do |f| %>
   <%= f.hidden_field :searched, value: true %>
-  <%= f.label :username %>
   <%= f.text_field :username %>
+  <%= f.check_box :friends %>
+  <%= f.label 'Show all friends' %>
   <%= f.submit 'Search' %>
 <% end %>
 
