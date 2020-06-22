@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_many :posts, foreign_key: :author_id
   has_many :comments, foreign_key: :author_id
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
   has_many :friend_requests, foreign_key: :receiver_id
   has_many :senders, class_name: 'User', through: :friend_requests
